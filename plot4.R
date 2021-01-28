@@ -1,0 +1,15 @@
+
+cdata <- read.csv('clean_data.csv')
+for (i in 3:9){data[,i]<- as.numeric(data[,i])}
+cdata$timedate <- strptime(cdata$timedate,'%Y-%m-%d_%H:%M:%S')
+par(mfrow = c(2,2))
+with(data = cdata,plot(timedate,Global_active_power,type = 'l'))
+with(data = cdata, plot(timedate,Voltage,type = 'l'))
+with(data = cdata,{plot(timedate,Sub_metering_1,type = 'l',ylab = 'Energy sub metering')
+  points(timedate,Sub_metering_2,type = 'l',col = 'red')
+  points(timedate,Sub_metering_3,type = 'l' ,col = 'blue')
+  legend('topright',legend = c('sub_metering_1','sub_metering_2','sub_metering_3'),pch = '_',col = c('black','red','blue'))
+})
+with(data = cdata,plot(timedate,Global_reactive_power,type = 'l'))
+dev.copy(png,'plot4.png')
+dev.off()

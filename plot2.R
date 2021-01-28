@@ -1,0 +1,6 @@
+cdata <- read.csv('clean_data.csv')
+cdata$timedate <- strptime(cdata$timedate,'%Y-%m-%d_%H:%M:%S')
+cdata$Global_active_power <- as.numeric(cdata$Global_active_power)
+with(data = cdata,plot(timedate,Global_active_power,type = 'l'))
+dev.copy(png,file = 'plot2.png')
+dev.off()
